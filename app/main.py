@@ -7,8 +7,8 @@ from app.logger import configure_logger
 
 def run_api_app() -> None:
     configure_logger()
-    app = get_app()
-    app.mount(settings.app.app_mount, app)
+    app = FastAPI(docs_url=None)
+    app.mount(settings.app.app_mount, get_app())
     uvicorn.run(
         app, host=settings.app.app_host, port=settings.app.app_port, log_config=None
     )
